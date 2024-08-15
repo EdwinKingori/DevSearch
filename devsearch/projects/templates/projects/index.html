@@ -10,10 +10,24 @@
     <hr>
     <h2>Project starts here!</h2>
 
-    <ul>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>project</th>
+            <th>positive Votes</th>
+            <th>Votes</th>
+            <th>Created_Date</th>
+        </tr>
         {% for project in projects %}
-            <li> Title: <a href="{% url "project" project.id %}"> {{project.title}}</a> --- {{project.description}}</li>
+        <tr>
+            <td>{{project.id}}</td>
+            <td>{{project.title}}</td>
+            <td>{{project.vote_ratio}}</td>
+            <td>{{project.vote_total}}</td>
+            <td>{{project.created}}</td>
+            <td><a href="{% url "project" project.id %}">view</a></td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
 
 {% endblock content %}

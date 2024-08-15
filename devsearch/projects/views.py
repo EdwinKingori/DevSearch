@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import Project, Reviews, Tag
 # Create your views here.
 
 projectsList = [
@@ -22,16 +22,15 @@ projectsList = [
 
 
 def projects(request):
-    msg = "You are on the project's page"
-    context = {'message': msg, "projects": projectsList}
+    projects = Project.objects.all()
+    context = {'projects': projects}
     return render(request, 'projects/index.html',
                   context)
 
 
 def project(request, pk):
-    projectObj = None
-    for i in projectsList:
-        if i['id'] == pk:
-            projectObj = i
+    projectObj = Project.objects.get(id=pk)
+    tags = projectObj.tags.all()
     return render(request, 'projects/projects.html',
-                  {'project': projectObj})
+                  {'project': projectObj,
+                   'tags': tags})
