@@ -1,24 +1,7 @@
 from django.shortcuts import render
 from .models import Project, Reviews, Tag
+from .forms import ProjectForm
 # Create your views here.
-
-projectsList = [
-    {
-        'id': '1',
-        'title': "Ecommerce Website",
-        'description': "fully Functional devsearch site"
-    },
-    {
-        'id': '2',
-        'title': "Portffolio Website",
-        'description': "fully Functional personal portfolio site"
-    },
-    {
-        'id': '3',
-        'title': "work Website",
-        'description': "fully Functional working site"
-    },
-]
 
 
 def projects(request):
@@ -34,3 +17,9 @@ def project(request, pk):
     return render(request, 'projects/projects.html',
                   {'project': projectObj,
                    'tags': tags})
+
+
+def createProject(request):
+    form = ProjectForm()
+    context = {'form': form}
+    return render(request, "projects/project_form.html", context)

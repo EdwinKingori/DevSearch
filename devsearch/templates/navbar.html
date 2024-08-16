@@ -2,6 +2,10 @@
 
 
 {% block content %}
-    <h1>LOGO</h1>
+   <div>
+    <h2>LOGO</h2> | {{me}} | {{sponsor}}
+    <a href="{% url 'create-project' %}">Add Project</a>
     <hr>
+   </div>
+
 {% endblock content %}
