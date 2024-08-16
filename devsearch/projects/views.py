@@ -18,6 +18,8 @@ def project(request, pk):
                   {'project': projectObj,
                    'tags': tags})
 
+# Creating/posting data in the modeldatabase
+
 
 def createProject(request):
     form = ProjectForm()
@@ -32,3 +34,33 @@ def createProject(request):
         return redirect('projects')
     context = {'form': form}
     return render(request, "projects/project_form.html", context)
+
+# Updating data in the modeldatabase
+
+
+def updateProject(request, pk):
+    project = Project.objects.get(id=pk)
+    form = ProjectForm(instance=project)
+
+  # if this is a POST request we need to process the form data
+    if request.method == "POST":
+        # create a form instance and populate it with data from the request:
+        form = ProjectForm(request.POST, instance=project)
+        # check whether it's valid:
+        if form.is_valid():
+            form.save()
+        # redirect user after filling the form
+        return redirect('projects')
+
+    context = {'form': form}
+    return render(request, "projects/project_form.html", context)
+
+
+def deleteProject(request, pk):
+    project = Project.objects.get(id=pk)
+
+    if request.method == "POST":
+        project.delete()
+        return redirect("projects")
+    context = {'object': project}
+    return render(request, 'projects/delete.html', context)
