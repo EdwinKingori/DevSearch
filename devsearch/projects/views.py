@@ -7,14 +7,14 @@ from .forms import ProjectForm
 def projects(request):
     projects = Project.objects.all()
     context = {'projects': projects}
-    return render(request, 'projects/index.html',
+    return render(request, 'projects/projects.html',
                   context)
 
 
 def project(request, pk):
     projectObj = Project.objects.get(id=pk)
     tags = projectObj.tags.all()
-    return render(request, 'projects/projects.html',
+    return render(request, 'projects/single_project.html',
                   {'project': projectObj,
                    'tags': tags})
 
