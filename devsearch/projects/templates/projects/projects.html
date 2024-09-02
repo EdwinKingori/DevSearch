@@ -5,6 +5,9 @@
 {% endblock title %}
 
 {% block content %}
+
+    <img style="max-width: 500px;" src="{{ project.featured_image.url }}" alt="">
+
     <h1>Projects Template</h1>
     <hr>
     {% for tag in tags %}
