@@ -22,12 +22,21 @@
                         </li>
                     {% endif %}
 
-                    <li>
-                    <a title="Stackoverflow" href="#" target="_blank"><i class="im im-stackoverflow"></i></a>
-                    </li>
-                    <li>
-                    <a title="Twitter" href="#" target="_blank"><i class="im im-twitter"></i></a>
-                    </li>
+                    
+                    {% if profile.social_stackoverflow %}
+                        <li>
+                            <a title="Stackoverflow" href="#" target="_blank">
+                                <i class="zmdi zmdi-code" style="font-size: 1.8em;"></i></a>
+                        </li>
+                    {% endif %}
+            
+                    {% if profile.social_twitter %}
+                        <li>
+                            <a title="Twitter" href="#" target="_blank">
+                                <i class="zmdi zmdi-twitter" style="font-size: 1.8em;"></i></a>
+                        </li>
+                    {% endif %}
+                        
                     
                     {% if profile.social_linkedin %}
                         <li> <a title="LinkedIn" href="#" target="_blank">
@@ -36,9 +45,14 @@
                     {% endif %}
                         
                     
-                    <li>
-                    <a title="Personal Website" href="#" target="_blank"><i class="im im-globe"></i></a>
-                    </li>
+                    {% if profile.social_website %}
+                        <li>
+                            <a title="Personal Website" href="#" target="_blank">
+                                <i class="zmdi zmdi-globe" style="font-size: 1.8em;"></i></a>
+                        </li>
+                    {% endif %}
+                        
+                    
                 </ul>
                 <a href="#" class="btn btn--sub btn--lg">Send Message </a>
                 </div>
@@ -47,14 +61,7 @@
             <div class="column column--2of3">
             <div class="devInfo">
                 <h3 class="devInfo__title">About Me</h3>
-                <p class="devInfo__about">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex illum ipsum iusto consequatur. Totam,
-                dolorum fugiat, debitis facere illo nostrum nesciunt maxime, deserunt enim voluptatibus modi natus velit
-                voluptatum. Dicta eritatis exercitationem ut quos a placeat obcaecati? Architecto illum!
-                <br />
-                Amet consectetur adipisicing elit. Veritatis exercitationem ut quos a placeat obcaecati? Architecto
-                illum, atque delectus nemo dolorem inventore ab facilis? Dolor placeat vel delectus ipsam ullam.
-                </p>
+                <p class="devInfo__about">{{profile.bio}}</p>
             </div>
             <div class="devInfo">
                 <h3 class="devInfo__title">Skills</h3>
