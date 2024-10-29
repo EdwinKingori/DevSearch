@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
 
@@ -15,14 +15,57 @@
         </form>
         <p> Already have an account? <a href="{% url 'login' %}">Sign UP</a></p>
     {% else %}
-        <form method="POST" action="{% url 'login' %}">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Enter password">
-            <button type="submit">Login</button>
+        <div class="auth">
+        <div class="card">
+            <div class="auth__header text-center">
+            <a href="/">
+                <img src=" {% static 'images/icon.svg' %} " alt="icon" />
+            </a>
+            <h3>Account Login</h3>
+            <p>Hello Developer, Welcome Back!</p>
+            </div>
 
-            <p> Don't have an account? <a href="{% url 'register' %}">Sign UP</a></p>
-        </form>
+            <form method="POST" action="{% url 'login' %}" class="form auth__form">
+                {% csrf_token %}
+                {{form.as_p}}
+            <!-- Input:username -->
+            <div class="form__field">
+                <label for="formInput#text">Username: </label>
+                <input
+                class="input input--text"
+                id="formInput#text"
+                type="text"
+                name="username"
+                placeholder="Enter your username..."
+                />
+            </div>
+
+            <!-- Input:Password -->
+            <div class="form__field">
+                <label for="formInput#password">Password: </label>
+                <input
+                class="input input--password"
+                id="formInput#passowrd"
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                />
+            </div>
+
+            <div class="auth__actions">
+                <input class="btn btn--sub btn--lg" type="submit" value="Log In" />
+                <a href="forgetpassword.html">Forget Password?</a>
+            </div>
+
+            </form>
+
+            <div class="auth__alternative">
+            <p>Don’t have an Account?</p>
+            <a href="{% url 'register' %}">Sign Up</a>
+            </div>
+        </div>
+        </div>
+    
     {% endif %}
         
     
