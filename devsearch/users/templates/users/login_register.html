@@ -5,15 +5,50 @@
 
     
     {% if page == 'register' %}
-        <h1>Register User</h1>
-
         
-        <form method="POST" action="{% url 'register' %}">
-            {% csrf_token %}
-            {{form.as_p}}
-            <input type="submit" value='register User'>
-        </form>
-        <p> Already have an account? <a href="{% url 'login' %}">Sign UP</a></p>
+        <div class="auth">
+            <div class="card">
+                <div class="auth__header text-center">
+                    <a href="/">
+                        <img src="{% static 'images/icon.svg' %}" alt="icon" />
+                    </a>
+                    <h3>Register an Account</h3>
+                    <p>Create a new developer account</p>
+                </div>
+
+                <form method="POST" action="{% url 'register' %}" class="form auth__form">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <div class="form__field">
+                            <label for="formInput#text">{{field.label}} </label>
+                            {{field}}
+
+                            <!-- Displaying the inbuilt helper text from django forms-->
+                            {% if field.help_text %}
+                                <small> {{field.help_text}}</small>
+                            {% endif %}
+                            
+                            <!-- displaying errors in red color during signup-->
+                            {% for error in field.errors %}
+                                <p style="color: red;">{{error}}</p>
+                            {% endfor %}
+                                
+                    {% endfor %}
+
+                    <div class="auth__actions">
+                        <input class="btn btn--sub btn--lg" type="submit" value="Sign  In" />
+                    </div>
+                </form>
+
+                <div class="auth__alternative">
+                    <p>Already have an Account?</p>
+                    <a href="{% url 'login' %}">Log In</a>
+                </div>
+
+            </div>
+        </div>
+
     {% else %}
         <div class="auth">
         <div class="card">
