@@ -74,14 +74,8 @@ def profiles(request):
 
 def userprofile(request, pk):
     profile = Profile.objects.get(id=pk)
-
-    topskills = profile.skill_set.exclude(description__exact="")
-    otherskills = profile.skill_set.filter(description="")
-
     context = {
-        "profile": profile,
-        "topskills": topskills,
-        "otherskills": otherskills
+        'profile': profile
     }
     return render(request, 'users/user-profile.html', context)
 
@@ -89,6 +83,16 @@ def userprofile(request, pk):
 @login_required(login_url='login')
 def userAccount(request):
     profile = request.user.profile
+    topskills = profile.skill_set.exclude(description__exact="")
+    otherskills = profile.skill_set.filter(description="")
+    skills = profile.skill_set.all()
+    projects = profile.project_set.all()
 
-    context = {'profile': profile}
+    context = {
+        'profile': profile,
+        "topskills": topskills,
+        "otherskills": otherskills,
+        'skills': skills,
+        'projects': projects
+    }
     return render(request, 'users/account.html', context)
