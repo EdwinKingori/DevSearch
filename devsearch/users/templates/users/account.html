@@ -66,7 +66,7 @@
           </div>
           <div class="settings">
             <h3 class="settings__title">Skills</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#">
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-skill' %}">
               <i class="zmdi zmdi-plus" style="margin-right: 4px;"></i> Add Skill</a>
           </div>
 
@@ -80,7 +80,7 @@
                     </p>
                   </td>
                   <td class="settings__tableActions">
-                    <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i class="im im-edit"></i> Edit</a>
+                    <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-skill' skill.id %}"><i class="im im-edit"></i> Edit</a>
                     <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
                       Delete</a>
                   </td>
@@ -90,7 +90,7 @@
 
           <div class="settings">
             <h3 class="settings__title">Projects</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="im im-plus"></i> Add Project</a>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-project' %}"><i class="im im-plus"></i> Add Project</a>
           </div>
 
           <table class="settings__table">
@@ -106,7 +106,7 @@
                     </p>
                   </td>
                   <td class="settings__tableActions">
-                    <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i class="im im-edit"></i> Edit</a>
+                    <a class="tag tag--pill tag--main settings__btn" href="{% url 'update' project.id %}"><i class="im im-edit"></i> Edit</a>
                     <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
                       Delete</a>
                   </td>

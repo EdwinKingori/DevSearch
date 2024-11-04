@@ -24,16 +24,20 @@ def project(request, pk):
 
 @login_required(login_url='login')
 def createProject(request):
+    profile = request.user.profile
     form = ProjectForm()
+
   # if this is a POST request we need to process the form data
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
         form = ProjectForm(request.POST, request.FILES)
         # check whether it's valid:
         if form.is_valid():
-            form.save()
+            project = form.save(commit=False)
+            project.owner = profile
+            project.save()
         # redirect user after filling the form
-        return redirect('projects')
+            return redirect('projects')
     context = {'form': form}
     return render(request, "projects/project_form.html", context)
 
@@ -42,7 +46,8 @@ def createProject(request):
 
 @login_required(login_url='login')
 def updateProject(request, pk):
-    project = Project.objects.get(id=pk)
+    profile = request.user.profile
+    project = profile.project_set.get(id=pk)
     form = ProjectForm(instance=project)
 
   # if this is a POST request we need to process the form data
@@ -53,7 +58,7 @@ def updateProject(request, pk):
         if form.is_valid():
             form.save()
         # redirect user after filling the form
-        return redirect('projects')
+            return redirect('projects')
 
     context = {'form': form}
     return render(request, "projects/project_form.html", context)
@@ -61,10 +66,11 @@ def updateProject(request, pk):
 
 @login_required(login_url='login')
 def deleteProject(request, pk):
-    project = Project.objects.get(id=pk)
+    profile = request.user.profile
+    project = profile.project_set.get(id=pk)
 
     if request.method == "POST":
         project.delete()
-        return redirect("projects")
+        return redirect('projects')
     context = {'object': project}
     return render(request, 'projects/delete.html', context)
