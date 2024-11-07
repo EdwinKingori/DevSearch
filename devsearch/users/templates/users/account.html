@@ -12,7 +12,7 @@
         <div class="column column--1of3">
           <div class="card text-center">
             <div class="card__body dev">
-              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i class="zmdi zmdi-edit"></i></i> Edit</a>
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i class="zmdi zmdi-edit"></i>Edit</a>
               <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" />
               <h2 class="dev__name">{{profile.name}}</h2>
               <p class="dev__title">{{profile.short_intro}}</p>
@@ -67,7 +67,7 @@
           <div class="settings">
             <h3 class="settings__title">Skills</h3>
             <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-skill' %}">
-              <i class="zmdi zmdi-plus" style="margin-right: 4px;"></i> Add Skill</a>
+              <i class="zmdi zmdi-plus" style="margin-right: 4px;"></i>Add Skill</a>
           </div>
 
           <table class="settings__table">
@@ -90,7 +90,7 @@
 
           <div class="settings">
             <h3 class="settings__title">Projects</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-project' %}"><i class="im im-plus"></i> Add Project</a>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-project' %}"><i class="zmdi zmdi-plus" style="margin-right: 4px;"></i>Add Project</a>
           </div>
 
           <table class="settings__table">
