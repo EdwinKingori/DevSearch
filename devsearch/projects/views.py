@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Project, Reviews, Tag
 from django.contrib.auth.decorators import login_required
 from .forms import ProjectForm
@@ -12,8 +12,8 @@ def projects(request):
                   context)
 
 
-def project(request, pk):
-    projectObj = Project.objects.get(id=pk)
+def project(request, slug):
+    projectObj = get_object_or_404(Project, slug=slug)
     tags = projectObj.tags.all()
     return render(request, 'projects/single_project.html',
                   {'project': projectObj,
