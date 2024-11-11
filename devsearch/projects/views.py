@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import ProjectForm
+from django.contrib import messages
+from .forms import ProjectForm, ReviewForm
 from .models import Project, Reviews
 from .utils import searchProjects, paginateProjects
 
@@ -21,12 +22,28 @@ def projects(request):
                   context)
 
 
-def project(request, pk):
-    projectObj = Project.objects.get(id=pk)
+def project(request, slug):
+    projectObj = get_object_or_404(Project, slug=slug)
     tags = projectObj.tags.all()
-    return render(request, 'projects/single_project.html',
-                  {'project': projectObj,
-                   'tags': tags})
+    form = ReviewForm()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        review = form.save(commit=False)
+        review.project = projectObj
+        review.owner = request.user.profile
+        review.save()
+
+        projectObj.getVoteCount
+
+        messages.success(request, 'Your review was successfully submitted!')
+        return redirect('project', slug=projectObj.slug)
+
+    return render(request, 'projects/single_project.html', {
+        'project': projectObj,
+        'tags': tags,
+        'form': form
+    })
 
 # Creating/posting data in the modeldatabase
 
