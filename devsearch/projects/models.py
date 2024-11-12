@@ -33,6 +33,14 @@ class Project(models.Model):
     class Meta:
         ordering = ['created']
 
+    class Meta:
+        ordering = ['-vote_ratio', '-vote_total', 'title']
+
+    @property
+    def reviewers(self):
+        queryset = self.reviews.values_list('owner_id', flat=True)
+        return queryset
+
     @property
     def getVoteCount(self):
         reviews = self.reviews.all()
