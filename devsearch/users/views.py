@@ -179,3 +179,11 @@ def deleteSkill(request, pk):
         'object': skill
     }
     return render(request, "delete.html", context)
+
+
+@login_required(login_url='login')
+def inbox(request):
+    context = {
+
+    }
+    return render(request, 'users/inbox.html', context)
