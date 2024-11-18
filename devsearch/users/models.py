@@ -48,7 +48,7 @@ class Skill(models.Model):
 class Message(models.Model):
     sender = models.ForeignKey(
         Profile, on_delete=models.SET_NULL, null=True, blank=True)
-    recepient = models.ForeignKey(
+    recipient = models.ForeignKey(
         Profile, on_delete=models.SET_NULL, null=True, related_name="messages")
     name = models.CharField(max_length=200, blank=True, null=True)
     email = models.EmailField(max_length=500, blank=True, null=True)

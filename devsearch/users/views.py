@@ -207,7 +207,7 @@ def viewMessage(request, pk):
 
 
 def createMessage(request, pk):
-    recepient = Profile.objects.get(id=pk)
+    recipient = Profile.objects.get(id=pk)
     form = MessageForm()
 
     try:
@@ -220,7 +220,7 @@ def createMessage(request, pk):
         if form.is_valid():
             message = form.save(commit=False)
             message.sender = sender
-            message.recipient = recepient
+            message.recipient = recipient
 
         if sender:
             message.name = sender.name
@@ -228,10 +228,10 @@ def createMessage(request, pk):
         message.save()
 
         messages.success(request, 'Your message was successfully sent!')
-        return redirect('user-profile', pk=recepient.id)
+        return redirect('user-profile', pk=recipient.id)
 
     context = {
-        'recepient': recepient,
+        'recepient': recipient,
         'form': form
     }
     return render(request, 'users/message_form.html', context)
