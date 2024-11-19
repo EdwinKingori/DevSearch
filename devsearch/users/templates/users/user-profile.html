@@ -54,7 +54,9 @@
                         
                     
                 </ul>
-                <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+                {% if request.user.profile.id != profile.id %}  
+                    <a href="{% url 'create-message' profile.id %}" class="btn btn--sub btn--lg">Send Message</a>
+                {% endif %}
                 </div>
             </div>
             </div>
@@ -92,7 +94,7 @@
                     {% for project in profile.project_set.all %}
                         <div class="column">
                             <div class="card project">
-                                <a href="{% url 'project' project.id %}" class="project">
+                                <a href="{% url 'project' slug=project.slug %}" class="project">
                                     <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
                                     <div class="card__body">
                                         <h3 class="project__title">{{project.title}}</h3>

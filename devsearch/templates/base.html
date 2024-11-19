@@ -22,7 +22,7 @@
 
     {% include "navbar.html" with me="King'ori" sponsor="Udemy" %}
 
-    {% if messages %}
+    {% comment %} {% if messages %}
         <ul class="messages">
             {% for message in messages %}
                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
@@ -30,11 +30,29 @@
                 </li>
             {% endfor %}
         </ul>
+    {% endif %} {% endcomment %}
+
+    
+    {% if messages %}
+
+        {% for message in messages %}
+
+        <div style="display: flex; justify-content: center;">
+            <div class="alert alert--{{message.tags}}">
+                <p class="alert alert__message">{{ message }}</p>
+                <button class="alert__close">⨯</button>
+            </div>
+        </div>
+            
+        {% endfor %}
+
     {% endif %}
+        
     
     {% block content %}
          
     {% endblock content %}
-      <P>FOOTER</P>
+    
 </body>
+<script src="{% static 'uikit/app.js' %}"></script> 
 </html>
