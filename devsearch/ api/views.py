@@ -2,7 +2,8 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ProjectSerializer
-from projects.models import Project
+from projects.models import Project, Tag
+from users.models import Profile
 
 
 @api_view(['GET'])
