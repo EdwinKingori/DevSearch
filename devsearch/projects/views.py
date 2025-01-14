@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import ProjectForm, ReviewForm
-from .models import Project, Reviews
+from .models import Project, Reviews, Tag
 from .utils import searchProjects, paginateProjects
 
 # Create your views here.
@@ -78,11 +78,19 @@ def updateProject(request, pk):
 
   # if this is a POST request we need to process the form data
     if request.method == "POST":
+        # changing the approach in which users can submit their desired tags
+        newtags = request.POST.get('newtags', '').split()
+
         # create a form instance and populate it with data from the request:
         form = ProjectForm(request.POST, request.FILES, instance=project)
         # check whether it's valid:
         if form.is_valid():
             form.save()
+
+            for tag in newtags:
+                tag_obj, created = Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag_obj)
+
         # redirect user after filling the form
             return redirect('account')
 

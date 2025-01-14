@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block title %}
@@ -28,9 +29,15 @@
                         {{field}}
                     </div>
                     {% endfor %}
+
+                    <div class="form__field">
+                        <label for="formInput#text">Tags</label>
+                        <textarea class="input" name="newtags" placeholder="Add tags here..."></textarea>
+                    </div>
                     
                     <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
                 </form>
+                <script src="{% static 'js/tags.js' %}"></script>
             </div>
         </div>
     </main>
