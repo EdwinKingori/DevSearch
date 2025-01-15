@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{% static 'uikit/styles/uikit.css' %}" />
     <!-- Dev Search UI -->
     <link rel="stylesheet" href="{% static 'styles/app.css' %}" />
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css" />
 
     <title>DevSearch - Connect with Developers!</title>
 </head>
@@ -52,7 +54,22 @@
     {% block content %}
          
     {% endblock content %}
+
+    {% block script %} 
+    
+    {% endblock script %}
     
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+    // Initialize Highlight.js
+    document.addEventListener('DOMContentLoaded', () => {
+        hljs.highlightAll();
+    });
+</script>
+
 <script src="{% static 'uikit/app.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script> 
+<script src="{% static 'js/tags.js' %}"></script> 
 </html>

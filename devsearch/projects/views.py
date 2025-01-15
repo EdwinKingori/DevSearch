@@ -55,6 +55,7 @@ def createProject(request):
 
   # if this is a POST request we need to process the form data
     if request.method == "POST":
+        newtags = request.POST.get('newtags', '').split()
         # create a form instance and populate it with data from the request:
         form = ProjectForm(request.POST, request.FILES)
         # check whether it's valid:
@@ -62,6 +63,11 @@ def createProject(request):
             project = form.save(commit=False)
             project.owner = profile
             project.save()
+
+            for tag in newtags:
+                tag, created = Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
+
         # redirect user after filling the form
             return redirect('account')
     context = {'form': form}
@@ -85,16 +91,19 @@ def updateProject(request, pk):
         form = ProjectForm(request.POST, request.FILES, instance=project)
         # check whether it's valid:
         if form.is_valid():
-            form.save()
+            project = form.save()
 
             for tag in newtags:
-                tag_obj, created = Tag.objects.get_or_create(name=tag)
-                project.tags.add(tag_obj)
+                tag, created = Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
 
         # redirect user after filling the form
             return redirect('account')
 
-    context = {'form': form}
+    context = {
+        'form': form,
+        'project': project
+    }
     return render(request, "projects/project_form.html", context)
 
 

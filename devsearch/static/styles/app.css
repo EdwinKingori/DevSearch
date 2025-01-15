@@ -845,3 +845,39 @@ img {
   margin-bottom: 1rem;
   margin-top: 2rem;
 }
+
+/*=======================
+  Tags Styling
+========================*/
+
+.tags {
+    list-style-type: none;
+    margin: 10px 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 14px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    color: darkred;
+}

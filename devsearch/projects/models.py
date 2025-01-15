@@ -7,7 +7,7 @@ from django.utils.text import slugify
 
 class Project(models.Model):
     owner = models.ForeignKey(
-        Profile, null=True, blank=True, on_delete=models.SET_NULL)
+        Profile, null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField(null=True, blank=True)
@@ -35,6 +35,14 @@ class Project(models.Model):
 
     class Meta:
         ordering = ['-vote_ratio', '-vote_total', 'title']
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.featured_image.url
+        except:
+            url = ''
+        return url
 
     @property
     def reviewers(self):
