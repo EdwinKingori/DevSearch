@@ -42,6 +42,8 @@ Authentication: Django’s built-in authentication system with additional featur
 
 API Testing Tool: utilizing Postman for testing and documenting the project's API endpoints
 
+Deployment: Hosted on pythonanywhere: https://freelancereddy.pythonanywhere.com 
+
 # Installation procedure
 
 #### Prerequisites
